@@ -1,5 +1,4 @@
 #!/usr/bin/python3.4
-import xlrd
 import sys
 ###########################
 #This Python script reads a configuration file, cleans everything outside tags configuration.
@@ -15,6 +14,19 @@ def xmlHeader (file_path):
 def xmlFooter (file_path):
     with open(file_path, "at") as myXML	
         myXML.write ('</tv>')
+#	
+def wChannel (file_path,sid,name):
+    with open(file_path, "at") as myXML	
+        myXML.writeline ('<channel id=',sid, '>')
+        myXML.writeline ('<display-name>',name,'></display-name></channel>')
+#	
+def wProgramme (file_path,starTime,stopTime,sid,title,subTitle,description):
+    with open(file_path, "at") as myXML	
+        myXML.writeline ('<programme start=',startTime, ' stop=',stopTime, ' channel=', sid,'>')
+        myXML.writeline ('<title lang="Eng> "',title, '</title>')
+        myXML.writeline ('<sub-title lang="Eng">',title, '</sub-title>')
+        myXML.writeline ('<desc lang="Eng">',description, '</desc>')
+        myXML.writeline ('</programme>')
 #	
 def openDirtyConfFile(input_file_path, output_file_path):
     myTagHead = "<configuration>"
